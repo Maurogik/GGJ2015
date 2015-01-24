@@ -47,7 +47,6 @@ public class XBoxController : MonoBehaviour {
 			prevState = state;
 			state = GamePad.GetState (playerIndex);
 			
-			
 			// Set vibration according to triggers
 			GamePad.SetVibration (playerIndex, state.Triggers.Left, state.Triggers.Right);
 			
