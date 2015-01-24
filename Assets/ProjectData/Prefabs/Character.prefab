@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8db343311e2514488b8171365ab80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 200
   rotationSpeed: 45
 --- !u!124 &12431234
 Behaviour:
@@ -260,7 +260,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 131232}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ecd182090da385a41882ea6165b3104e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: .5
