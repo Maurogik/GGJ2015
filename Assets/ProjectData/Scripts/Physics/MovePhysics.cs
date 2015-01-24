@@ -16,10 +16,12 @@ public class MovePhysics : MonoBehaviour {
         Vector3 move = new Vector3 (XBoxController.instance.GetLeftStick ().x, 0.0f, XBoxController.instance.GetLeftStick ().y);
         move = transform.TransformDirection (move);
         move = move * Time.deltaTime * speed;
+        move.y = rigidbody.velocity.y;
         //rigidbody.AddForce (move);
         rigidbody.velocity = move;
 
-        float rotX = XBoxController.instance.GetRightStick ().x * Time.deltaTime * rotationSpeed;
-        transform.Rotate(new Vector3( 0.0f, rotX, 0.0f));
+        float rotY = XBoxController.instance.GetRightStick ().x * Time.deltaTime * rotationSpeed;
+        float rotX = XBoxController.instance.GetRightStick ().y * Time.deltaTime * rotationSpeed;
+        transform.Rotate(new Vector3( 0.0f, rotY, 0.0f));
 	}
 }
