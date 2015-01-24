@@ -17,7 +17,10 @@ public class MovecharCtrl : MonoBehaviour {
         Vector3 move = new Vector3 (XBoxController.instance.GetLeftStick ().x, 0.0f, XBoxController.instance.GetLeftStick ().y);
         move = transform.TransformDirection (move);
         move.y = 0;
-        move.Normalize ();
+        if (XBoxController.instance.GetButtonA()) {
+            //rigidbody.AddForce(Vector3.up * 10.0f);
+        }
+        //move.Normalize ();
         float valX = XBoxController.instance.GetRightStick ().x * Time.deltaTime * rotationSpeed;
         float valY = XBoxController.instance.GetRightStick ().y * Time.deltaTime * rotationSpeed;
         //transform.Rotate( new Vector3( -rotX, rotY, 0.0f) );
