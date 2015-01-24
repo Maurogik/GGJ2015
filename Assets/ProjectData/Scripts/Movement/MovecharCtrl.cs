@@ -6,6 +6,8 @@ public class MovecharCtrl : MonoBehaviour {
     private CharacterController mCtrl;
     public float speed = 5.0f;
     public float rotationSpeed = 2.0f;
+    public float grabity = 9.8f;
+    
 
     // Use this for initialization
 	void Start () {
@@ -16,9 +18,9 @@ public class MovecharCtrl : MonoBehaviour {
 	void Update () {
         Vector3 move = new Vector3 (XBoxController.instance.GetLeftStick ().x, 0.0f, XBoxController.instance.GetLeftStick ().y);
         move = transform.TransformDirection (move);
-        move.y = 0;
+        move.y = -grabity;
         if (XBoxController.instance.GetButtonA()) {
-            //rigidbody.AddForce(Vector3.up * 10.0f);
+            move.y = 10.0f * Time.deltaTime;
         }
         //move.Normalize ();
         float valX = XBoxController.instance.GetRightStick ().x * Time.deltaTime * rotationSpeed;
@@ -27,6 +29,14 @@ public class MovecharCtrl : MonoBehaviour {
         Vector3 lookAt = new Vector3 (valX * Time.deltaTime, valY * Time.deltaTime, 1.0f);
         lookAt *= rotationSpeed;
         transform.LookAt (transform.position + transform.TransformDirection (lookAt));
-        mCtrl.SimpleMove (move * speed);
+        mCtrl.Move (move * speed);
 	}
+
+    IEnumerator jump(){
+        float startTime = Time.time;
+        while(startTime + jumpDuration > Time.time){
+            Vector3 pos = transform.position;
+            yield return null;
+        }
+    }
 }

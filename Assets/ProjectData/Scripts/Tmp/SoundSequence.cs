@@ -13,7 +13,7 @@ public class SoundSequence : MonoBehaviour {
 
     private int mCurrentInd = 0;
 
-    public void start(){
+    public void Start(){
         idleVolume = audioSourceIdle.volume;
         movingVolume = audioSourceMoving.volume;
     }
@@ -60,6 +60,7 @@ public class SoundSequence : MonoBehaviour {
             transform.position = Vector3.Lerp(start, target, progress);
             yield return null;
         }
+        Debug.Log ("Idle Volupe " + idleVolume);
         StartCoroutine (fadeIn (audioSourceIdle, idleVolume, 1.0f));
     }
 }
