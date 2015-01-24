@@ -7,10 +7,17 @@ public class MovecharCtrl : MonoBehaviour {
     public float speed = 5.0f;
     public float rotationSpeed = 2.0f;
     public float grabity = 4.5f;
+    public AudioSource stepSource;
+
+    private float walkVolume;
+    private Vector3 mLastStep;
     
 
     // Use this for initialization
 	void Start () {
+        walkVolume = stepSource.volume;
+        stepSource.volume = 0.0f;
+        mLastStep = transform.position;
         mCtrl = GetComponent<CharacterController> ();
 	}
 	
@@ -31,8 +38,26 @@ public class MovecharCtrl : MonoBehaviour {
         lookAt *= rotationSpeed;
         transform.LookAt (transform.position + transform.TransformDirection (lookAt));
         mCtrl.Move (move * speed * Time.deltaTime);
+        move.y = 0.0f;
+        if (move.magnitude > 0.2f) {
+            stepSource.volume = walkVolume;
+        } else {
+            stepSource.volume = 0.0f;
+        }
 	}
 
+    IEnumerator fadeOut(AudioSource source, float playDuration, float fadeduration){
+        source.volume = walkVolume;
+        yield return new WaitForSeconds (playDuration);
+        float startTime = Time.time;
+        float progress = 0.0f;
+        while (startTime + fadeduration > Time.time) {
+            progress = (Time.time - startTime)/fadeduration;
+            source.volume = Mathf.Lerp(walkVolume, 0.0f, progress);
+            yield return null;
+        }
+    }
+    
     /*IEnumerator jump(){
         float startTime = Time.time;
         while(startTime + jumpDuration > Time.time){
