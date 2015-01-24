@@ -8,7 +8,15 @@ public class SoundSequence : MonoBehaviour {
     public AudioSource audioSourceIdle;
     public AudioSource audioSourceMoving;
 
+    private float idleVolume = 0.0f;
+    private float movingVolume = 0.0f;
+
     private int mCurrentInd = 0;
+
+    public void start(){
+        idleVolume = audioSourceIdle.volume;
+        movingVolume = audioSourceMoving.volume;
+    }
 
     public void PlayNext(){
         //move
@@ -27,12 +35,12 @@ public class SoundSequence : MonoBehaviour {
         source.Stop ();
     }
 
-    IEnumerator fadeIn(AudioSource source, float duration){
+    IEnumerator fadeIn(AudioSource source, float targetVolume, float duration){
         float startTime = Time.time;
         float progress = 0.0f;
         while (startTime + interpolationTime > Time.time) {
             progress = (Time.time - startTime)/interpolationTime;
-            source.volume = progress;
+            source.volume = Mathf.Lerp(0.0f, targetVolume, progress);
             yield return null;
         }
         source.Play ();
@@ -52,6 +60,6 @@ public class SoundSequence : MonoBehaviour {
             transform.position = Vector3.Lerp(start, target, progress);
             yield return null;
         }
-        StartCoroutine (fadeIn (audioSourceIdle, 1.0f));
+        StartCoroutine (fadeIn (audioSourceIdle, idleVolume, 1.0f));
     }
 }
