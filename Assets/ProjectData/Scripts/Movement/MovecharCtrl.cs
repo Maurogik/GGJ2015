@@ -32,11 +32,11 @@ public class MovecharCtrl : MonoBehaviour {
         mCtrl.Move (move * speed);
 	}
 
-    IEnumerator jump(){
+    /*IEnumerator jump(){
         float startTime = Time.time;
         while(startTime + jumpDuration > Time.time){
             Vector3 pos = transform.position;
             yield return null;
         }
-    }
+    }*/
 }
