@@ -14,6 +14,11 @@ public class GameState : MonoBehaviour{
 
     public GameObject[] locationChangeTargets;
 
+
+    public void Awake(){
+        Application.targetFrameRate = 75;
+    }
+
     private void changeLocation(){
         Debug.Log ("location chnaged " + currentLocation);
         foreach (GameObject obj in locationChangeTargets) {

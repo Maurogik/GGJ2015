@@ -3,6 +3,8 @@ using System.Collections;
 
 public class VibrateOnColission : MonoBehaviour {
 
+    public GameObject soundPrefab;
+
 
     IEnumerator vibrateFor(float leftVal, float rightVal, float time){
         float startTime = Time.time;
@@ -16,7 +18,9 @@ public class VibrateOnColission : MonoBehaviour {
         if (collision.collider.gameObject.layer != LayerMask.NameToLayer("Wall")) {
             return;
         }
-
+        GameObject sound = Instantiate (soundPrefab) as GameObject;
+        sound.transform.position = transform.position;
+        Destroy (sound, 10.0f);
         float strength = collision.relativeVelocity.magnitude;
         Debug.Log ("Strenght : " + strength);
         //XBoxController.instance.Vibrate (strength * 0.3f, strength * 0.1f);        

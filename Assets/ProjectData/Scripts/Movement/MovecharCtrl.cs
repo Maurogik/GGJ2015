@@ -25,11 +25,11 @@ public class MovecharCtrl : MonoBehaviour {
 	void Update () {
         Vector3 move = new Vector3 (XBoxController.instance.GetLeftStick ().x, 0.0f, XBoxController.instance.GetLeftStick ().y);
         move = transform.TransformDirection (move);
-        if (XBoxController.instance.GetButtonA () && mCtrl.isGrounded) {
+        /*if (XBoxController.instance.GetButtonA () && mCtrl.isGrounded) {
             move.y = 60.0f;
-        } else {
+        } else {*/
             move.y = -grabity;
-        }
+        //}
         move.Normalize ();
         float valX = XBoxController.instance.GetRightStick ().x * Time.deltaTime * rotationSpeed;
         float valY = XBoxController.instance.GetRightStick ().y * Time.deltaTime * rotationSpeed;
@@ -39,11 +39,12 @@ public class MovecharCtrl : MonoBehaviour {
         transform.LookAt (transform.position + transform.TransformDirection (lookAt));
         mCtrl.Move (move * speed * Time.deltaTime);
         move.y = 0.0f;
-        if (move.magnitude > 0.2f) {
+        /*if (move.magnitude > 0.1f) {
             stepSource.volume = walkVolume;
         } else {
             stepSource.volume = 0.0f;
-        }
+        }*/
+        stepSource.volume = walkVolume * move.magnitude;
 	}
 
     IEnumerator fadeOut(AudioSource source, float playDuration, float fadeduration){
