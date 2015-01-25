@@ -8,10 +8,13 @@ public class MovecharCtrl : MonoBehaviour {
     public float rotationSpeed = 2.0f;
     public float grabity = 4.5f;
     public AudioSource stepSource;
+    public Light cheatLight;
 
     private float walkVolume;
     private Vector3 mLastStep;
-    
+
+    private float mAccumLight = 0.0f;
+    private float mMaxIntensity = 0.2f;
 
     // Use this for initialization
 	void Start () {
@@ -45,6 +48,15 @@ public class MovecharCtrl : MonoBehaviour {
             stepSource.volume = 0.0f;
         }*/
         stepSource.volume = walkVolume * move.magnitude;
+
+        if (XBoxController.instance.GetButtonA ()) {
+            mAccumLight += 0.1f * Time.deltaTime;
+        } else {
+            mAccumLight -= 0.1f * Time.deltaTime;
+        }
+        mAccumLight = Mathf.Min (mAccumLight, mMaxIntensity);
+        cheatLight.intensity = mAccumLight;
+        GameState.LightAccumCheat = mAccumLight;
 	}
 
     IEnumerator fadeOut(AudioSource source, float playDuration, float fadeduration){

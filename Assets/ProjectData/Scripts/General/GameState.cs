@@ -14,6 +14,7 @@ public class GameState : MonoBehaviour{
 
     public GameObject[] locationChangeTargets;
 
+    public static float LightAccumCheat = 0.0f;
 
     public void Awake(){
         Application.targetFrameRate = 75;

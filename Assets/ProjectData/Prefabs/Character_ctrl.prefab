@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &109094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 409094}
+  - 108: {fileID: 10809094}
+  m_Layer: 0
+  m_Name: Point light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &116300
 GameObject:
   m_ObjectHideFlags: 1
@@ -87,7 +103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &148654
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +113,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 448654}
   - 33: {fileID: 3348656}
-  - 136: {fileID: 13648656}
   - 23: {fileID: 2348656}
   - 54: {fileID: 5448656}
   - 114: {fileID: 11448654}
@@ -148,6 +163,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &409094
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109094}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 448654}
+  m_RootOrder: 0
 --- !u!4 &416300
 Transform:
   m_ObjectHideFlags: 1
@@ -186,7 +213,7 @@ Transform:
   - {fileID: 416302}
   - {fileID: 416306}
   m_Father: {fileID: 448654}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &416306
 Transform:
   m_ObjectHideFlags: 1
@@ -210,7 +237,7 @@ Transform:
   m_LocalScale: {x: .5, y: .5, z: .5}
   m_Children: []
   m_Father: {fileID: 448654}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &448654
 Transform:
   m_ObjectHideFlags: 1
@@ -221,6 +248,7 @@ Transform:
   m_LocalPosition: {x: 16.3999996, y: 6.36999989, z: -173.050003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 409094}
   - {fileID: 448652}
   - {fileID: 448656}
   - {fileID: 416304}
@@ -238,7 +266,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 448654}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &491492
 Transform:
   m_ObjectHideFlags: 1
@@ -250,7 +278,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 448654}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!20 &2016300
 Camera:
   m_ObjectHideFlags: 1
@@ -385,7 +413,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148652}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -527,6 +555,41 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148656}
   m_Enabled: 1
+--- !u!108 &10809094
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109094}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Type: 2
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: .300000012
+  m_Range: 30
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: .0500000007
+    m_Softness: 4
+    m_SoftnessFade: 1
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_ActuallyLightmapped: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 1
+  m_ShadowSamples: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_IndirectIntensity: 1
+  m_AreaSize: {x: 1, y: 1}
 --- !u!114 &11416300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -551,7 +614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nativeTextureScale: 1
   virtualTextureScale: 1
-  usePositionTracking: 1
+  usePositionTracking: 0
   eyeTextureFormat: 7
   eyeTextureDepth: 24
   timeWarp: 1
@@ -585,6 +648,7 @@ MonoBehaviour:
   rotationSpeed: 65
   grabity: 4.5
   stepSource: {fileID: 8291492}
+  cheatLight: {fileID: 10809094}
 --- !u!114 &11491492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -736,19 +800,6 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &13648656
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 148654}
-  m_Material: {fileID: 13400000, guid: ecd182090da385a41882ea6165b3104e, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: .5
-  m_Height: 2
-  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &14348656
 CharacterController:
