@@ -50,10 +50,12 @@ public class MovecharCtrl : MonoBehaviour {
         stepSource.volume = walkVolume * move.magnitude;
 
         if (XBoxController.instance.GetButtonA ()) {
+            Debug.Log("Apressed");
             mAccumLight += 0.1f * Time.deltaTime;
         } else {
             mAccumLight -= 0.1f * Time.deltaTime;
         }
+
         mAccumLight = Mathf.Min (mAccumLight, mMaxIntensity);
         cheatLight.intensity = mAccumLight;
         GameState.LightAccumCheat = mAccumLight;
