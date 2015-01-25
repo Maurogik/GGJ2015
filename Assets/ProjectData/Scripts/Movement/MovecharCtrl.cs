@@ -11,6 +11,10 @@ public class MovecharCtrl : MonoBehaviour {
     public Light cheatLight;
     public GameObject lightPrefab;
 
+    public GameObject[] firstEnable;
+
+    private bool firstApressed = false;
+
     private float walkVolume;
     private Vector3 mLastStep;
 
@@ -54,10 +58,27 @@ public class MovecharCtrl : MonoBehaviour {
         stepSource.volume = walkVolume * move.magnitude;
 
         if (XBoxController.instance.GetButtonADown ()) {
+            if(firstApressed == false){
+                firstApressed = true;
+                foreach(GameObject obj in firstEnable){
+                    obj.SetActive(true);
+                }
+            }
+
             GameObject light = Instantiate (lightPrefab) as GameObject;
             StartCoroutine(lightTarget(light));
             //mAccumLight += 0.1f * Time.deltaTime;
             
+        } else if (XBoxController.instance.GetButtonBDown ()) {
+            if(firstApressed == false){
+                firstApressed = true;
+                foreach(GameObject obj in firstEnable){
+                    obj.SetActive(true);
+                }
+                GameObject light = Instantiate (lightPrefab) as GameObject;
+                StartCoroutine(lightTarget(light));
+                //mAccumLight += 0.1f * Time.deltaTime;
+            }
         } else {
             //mAccumLight -= 0.1f * Time.deltaTime;
         }
