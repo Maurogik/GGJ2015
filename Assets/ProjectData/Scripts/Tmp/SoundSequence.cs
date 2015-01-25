@@ -13,6 +13,10 @@ public class SoundSequence : MonoBehaviour {
 
     private int mCurrentInd = 0;
 
+    public Vector3 getNextPos(){
+        return positionSequence [mCurrentInd + 1].position;
+    }
+
     public void Start(){
         idleVolume = audioSourceIdle.volume;
         movingVolume = audioSourceMoving.volume;

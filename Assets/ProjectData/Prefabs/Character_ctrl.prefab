@@ -578,7 +578,7 @@ Light:
     m_SoftnessFade: 1
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_ActuallyLightmapped: 0
+  m_ActuallyLightmapped: 1
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
@@ -649,6 +649,7 @@ MonoBehaviour:
   grabity: 4.5
   stepSource: {fileID: 8291492}
   cheatLight: {fileID: 10809094}
+  lightPrefab: {fileID: 191720, guid: 446b7aa9dbdf94646ac9697c972427a1, type: 2}
 --- !u!114 &11491492
 MonoBehaviour:
   m_ObjectHideFlags: 1

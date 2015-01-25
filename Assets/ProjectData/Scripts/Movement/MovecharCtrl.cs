@@ -9,6 +9,7 @@ public class MovecharCtrl : MonoBehaviour {
     public float grabity = 4.5f;
     public AudioSource stepSource;
     public Light cheatLight;
+    public GameObject lightPrefab;
 
     private float walkVolume;
     private Vector3 mLastStep;
@@ -16,8 +17,11 @@ public class MovecharCtrl : MonoBehaviour {
     private float mAccumLight = 0.0f;
     private float mMaxIntensity = 0.2f;
 
+    private SoundSequence mSequence;
+
     // Use this for initialization
 	void Start () {
+        mSequence = FindObjectOfType<SoundSequence> ();
         walkVolume = stepSource.volume;
         stepSource.volume = 0.0f;
         mLastStep = transform.position;
@@ -49,17 +53,35 @@ public class MovecharCtrl : MonoBehaviour {
         }*/
         stepSource.volume = walkVolume * move.magnitude;
 
-        if (XBoxController.instance.GetButtonA ()) {
-            Debug.Log("Apressed");
-            mAccumLight += 0.1f * Time.deltaTime;
+        if (XBoxController.instance.GetButtonADown ()) {
+            GameObject light = Instantiate (lightPrefab) as GameObject;
+            StartCoroutine(lightTarget(light));
+            //mAccumLight += 0.1f * Time.deltaTime;
+            
         } else {
-            mAccumLight -= 0.1f * Time.deltaTime;
+            //mAccumLight -= 0.1f * Time.deltaTime;
         }
 
-        mAccumLight = Mathf.Min (mAccumLight, mMaxIntensity);
-        cheatLight.intensity = mAccumLight;
+        //mAccumLight = Mathf.Min (mAccumLight, mMaxIntensity);
+        cheatLight.intensity = 0.0f;//mAccumLight;
         GameState.LightAccumCheat = mAccumLight;
 	}
+
+    IEnumerator lightTarget(GameObject light){
+        Debug.Log ("Light target : " + light, light);
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = mSequence.getNextPos();
+        //GameObject light = Instantiate (lightPrefab) as GameObject;
+        float startTime = Time.time;
+        float duration = 5.0f;
+        while (startTime + duration > Time.time) {
+            float progress = (Time.time - startTime)/duration;
+            light.transform.position = Vector3.Lerp(startPos, targetPos, progress);
+            yield return null;
+        }
+        yield return new WaitForSeconds(1.0f);
+        Destroy(light);
+    }
 
     IEnumerator fadeOut(AudioSource source, float playDuration, float fadeduration){
         source.volume = walkVolume;
